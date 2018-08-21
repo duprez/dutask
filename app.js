@@ -12,7 +12,8 @@ const user = nconf.get('mongoUser');
 const pass = nconf.get('mongoPass');
 const host = nconf.get('mongoHost');
 
-let uri = `mongodb+srv://${user}:${pass}@${host}/${nconf.get('mongoDatabase')}?retryWrites=true`;
+let uri =  process.env.MONGODB_URI || `mongodb+srv://${user}:${pass}@${host}/${nconf.get('mongoDatabase')}?retryWrites=true`;
+console.log('URL', uri);
 
 mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     if (err) {
