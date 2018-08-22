@@ -1,21 +1,13 @@
 'use strict';
 
-const mongodb = require('mongodb');
-const express = require('express');
-const nconf = require('nconf');
-
+var mongodb = require('mongodb');
+var express = require('express');
+var config = require('../config/config.js');
 var app = express();
 
-nconf.argv().env().file('keys.json');
+let url =  process.env.MONGODB_URI || `mongodb+srv://${config.user}:${config.pass}@${config.host}/${config.db}?retryWrites=true`;
 
-const user = nconf.get('mongoUser');
-const pass = nconf.get('mongoPass');
-const host = nconf.get('mongoHost');
-
-let uri =  process.env.MONGODB_URI || `mongodb+srv://${user}:${pass}@${host}/${nconf.get('mongoDatabase')}?retryWrites=true`;
-console.log('URL', uri);
-
-mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
+mongodb.MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
     if (err) {
         console.log('error: ', err);
     }

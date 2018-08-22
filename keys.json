@@ -1,7 +1,0 @@
-{
-    "mongoHost": "cluster0-nsk5i.mongodb.net",
-    "mongoPort": "27017",
-    "mongoDatabase": "dutask",
-    "mongoUser": "duprez",
-    "mongoPass": "qzRwSC9Wk6LxO7J5"
-}
